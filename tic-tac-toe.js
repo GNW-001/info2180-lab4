@@ -9,11 +9,15 @@ window.addEventListener('DOMContentLoaded', (event) => {
 	}
 	addCellClickListener();
 	addHover();
+	let replayButton = document.querySelector('.btn');
+	replayButton.addEventListener('click', resetGame);
+
 });
 
-let board = ['', '', '', '', '', '', '', '', ''];
 let turn = 0;
 let win = 0;
+
+
 
 function addCellClickListener() {
 	var cells = document.getElementsByClassName("square");
@@ -89,4 +93,17 @@ function checkWinner() {
 function getGrid(number) {
 	let idee = 'grid'.concat(number);
     return document.getElementById(idee).innerText;
+}
+
+
+ function resetGame() {
+	document.getElementById("status").innerHTML = "Move your mouse over a square and click to play an X or an O.";
+	turn = 0;
+	win = 0;
+	var paper = document.getElementsByClassName("square");
+	for (var i4 = 0; i4 < paper.length; i4++) {
+		paper[i4].innerHTML = "";
+		paper[i4].classList.remove("X","O");
+	}
+	addCellClickListener();
 }
