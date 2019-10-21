@@ -8,6 +8,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 		i2++;
 	}
 	addCellClickListener();
+	addHover();
 });
 
 let board = ['', '', '', '', '', '', '', '', ''];
@@ -17,6 +18,18 @@ function addCellClickListener() {
 	var cells = document.getElementsByClassName("square");
 	for (var i3 = 0; i3 < cells.length; i3++) {
 		cells[i3].addEventListener("click", placeMark);
+	}
+}
+
+function addHover() {
+	var cells = document.getElementsByClassName("square");
+	for (var i3 = 0; i3 < cells.length; i3++) {
+		cells[i3].onmouseover = function() {
+			this.classList.add("hover");
+		}
+		cells[i3].onmouseout = function() {
+			this.classList.remove("hover");
+		}
 	}
 }
 
