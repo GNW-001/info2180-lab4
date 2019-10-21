@@ -13,6 +13,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 let board = ['', '', '', '', '', '', '', '', ''];
 let turn = 0;
+let win = 0;
 
 function addCellClickListener() {
 	var cells = document.getElementsByClassName("square");
@@ -49,5 +50,43 @@ function placeMark() {
 	else {
 		return;
 	}
+	checkWinner();
 	turn ++;
+}
+
+function checkWinner() {
+	if ((getGrid(0) == 'X' && getGrid(1) == 'X' && getGrid(2) == 'X') ||
+	(getGrid(3) == 'X' && getGrid(4) == 'X' && getGrid(5) == 'X') ||
+	(getGrid(6) == 'X' && getGrid(7) == 'X' && getGrid(8) == 'X') ||
+	(getGrid(0) == 'X' && getGrid(3) == 'X' && getGrid(6) == 'X') ||
+	(getGrid(1) == 'X' && getGrid(4) == 'X' && getGrid(7) == 'X') ||
+	(getGrid(2) == 'X' && getGrid(5) == 'X' && getGrid(8) == 'X') ||
+	(getGrid(0) == 'X' && getGrid(4) == 'X' && getGrid(8) == 'X') ||
+	(getGrid(2) == 'X' && getGrid(4) == 'X' && getGrid(6) == 'X'))
+	{
+		document.getElementById("status").innerHTML = 'Congratulations! X is the Winner!';
+		win = 1;
+	}
+	if ((getGrid(0) == 'O' && getGrid(1) == 'O' && getGrid(2) == 'O') ||
+	(getGrid(3) == 'O' && getGrid(4) == 'O' && getGrid(5) == 'O') ||
+	(getGrid(6) == 'O' && getGrid(7) == 'O' && getGrid(8) == 'O') ||
+	(getGrid(0) == 'O' && getGrid(3) == 'O' && getGrid(6) == 'O') ||
+	(getGrid(1) == 'O' && getGrid(4) == 'O' && getGrid(7) == 'O') ||
+	(getGrid(2) == 'O' && getGrid(5) == 'O' && getGrid(8) == 'O') ||
+	(getGrid(0) == 'O' && getGrid(4) == 'O' && getGrid(8) == 'O') ||
+	(getGrid(2) == 'O' && getGrid(4) == 'O' && getGrid(6) == 'O'))
+	{
+		document.getElementById("status").innerHTML = 'Congratulations! O is the Winner!';
+		win = 1;
+	}
+	if (turn == 8 && win != 1) {
+		document.getElementById("status").innerHTML = "It's a draw!";
+	}
+
+	return;
+}
+
+function getGrid(number) {
+	let idee = 'grid'.concat(number);
+    return document.getElementById(idee).innerText;
 }
